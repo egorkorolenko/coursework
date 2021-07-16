@@ -8,10 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "volunteer")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
 public class Volunteer {
     @Id
@@ -32,18 +29,4 @@ public class Volunteer {
 
     @Column
     private String password;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Volunteer volunteer = (Volunteer) o;
-
-        return Objects.equals(id, volunteer.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 1280901492;
-    }
 }

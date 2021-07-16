@@ -8,10 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "request")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
 public class Request {
 
@@ -27,18 +24,4 @@ public class Request {
 
     @Column
     private String isReady;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Request request = (Request) o;
-
-        return Objects.equals(id, request.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 643690654;
-    }
 }

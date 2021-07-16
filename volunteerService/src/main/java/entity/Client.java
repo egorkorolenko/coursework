@@ -9,10 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "client")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
 @NoArgsConstructor
 public class Client {
     @Id
@@ -33,18 +30,4 @@ public class Client {
 
     @Column
     private String password;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Client client = (Client) o;
-
-        return Objects.equals(id, client.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 1756406093;
-    }
 }
