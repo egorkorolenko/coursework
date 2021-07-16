@@ -19,6 +19,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public VolunteerDto registerVolunteer(VolunteerDto dto) {
         return null;
+
     }
 
     @Override
