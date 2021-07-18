@@ -5,7 +5,6 @@ import volunteerServer.error.ServiceError;
 import volunteerServer.error.ServiceErrorCode;
 
 public class VolunteerUtils {
-
     public void validateVolunteerDto(VolunteerDto volunteerDto) {
         if (volunteerDto == null) {
             try {
@@ -15,4 +14,5 @@ public class VolunteerUtils {
             }
         }
     }
+
 }

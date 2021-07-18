@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.web.bind.annotation.*;
 import volunteerServer.dto.VolunteerDto;
+import volunteerServer.service.VolunteerService;
 import volunteerServer.serviceImpl.VolunteerServiceImpl;
 
 @RestController
@@ -12,7 +13,7 @@ import volunteerServer.serviceImpl.VolunteerServiceImpl;
 @Log
 @CrossOrigin
 public class VolunteerController {
-    private final VolunteerServiceImpl service;
+    private final VolunteerService service;
 
     @PostMapping("/register")
     public VolunteerDto registerVolunteer(@RequestBody VolunteerDto volunteerDto) {

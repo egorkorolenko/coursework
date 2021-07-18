@@ -8,14 +8,14 @@ import volunteerServer.entity.Volunteer;
 public class VolunteerConverter {
 
     public Volunteer fromVolunteerDtoToVolunteer(VolunteerDto volunteerDto) {
-        Volunteer volunteer = new Volunteer();
-        volunteer.setId(volunteerDto.getId());
-        volunteer.setUsername(volunteerDto.getUsername());
-        volunteer.setBirthdate(volunteer.getBirthdate());
-        volunteer.setEmail(volunteer.getEmail());
-        volunteer.setLogin(volunteerDto.getLogin());
-        volunteer.setPassword(volunteer.getPassword());
-        return volunteer;
+        Volunteer newVolunteer = new Volunteer();
+        newVolunteer.setId(volunteerDto.getId());
+        newVolunteer.setUsername(volunteerDto.getUsername());
+        newVolunteer.setBirthdate(volunteerDto.getBirthdate());
+        newVolunteer.setEmail(volunteerDto.getEmail());
+        newVolunteer.setLogin(volunteerDto.getLogin());
+        newVolunteer.setPassword(volunteerDto.getPassword());
+        return newVolunteer;
     }
 
     public VolunteerDto fromVolunteerToVolunteerDto(Volunteer volunteer) {

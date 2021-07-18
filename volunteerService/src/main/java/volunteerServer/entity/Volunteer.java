@@ -1,7 +1,6 @@
 package volunteerServer.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,18 +13,18 @@ public class Volunteer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "username")
+    @Column
     private String username;
 
-    @Column(name = "birthdate")
+    @Column
     private String birthdate;
 
-    @Column(name = "email")
+    @Column
     private String email;
 
-    @Column(name = "login")
+    @Column
     private String login;
 
-    @Column(name = "password")
+    @Column
     private String password;
 }

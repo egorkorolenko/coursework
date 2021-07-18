@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import volunteerServer.dto.VolunteerDto;
 import volunteerServer.entity.Volunteer;
-import volunteerServer.error.ServiceError;
-import volunteerServer.error.ServiceErrorCode;
 import volunteerServer.repository.VolunteerRepository;
 import volunteerServer.service.VolunteerService;
+import volunteerServer.serviceUtils.VolunteerUtils;
 
 import java.util.List;
 
@@ -17,10 +16,11 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     private final VolunteerRepository volunteerRepository;
     private final VolunteerConverter volunteerConverter;
+    private final VolunteerUtils volunteerUtils = new VolunteerUtils();
 
     @Override
     public VolunteerDto registerVolunteer(VolunteerDto dto) {
-        validateVolunteerDto(dto);
+        volunteerUtils.validateVolunteerDto(dto);
         Volunteer volunteer = volunteerRepository.save(volunteerConverter.fromVolunteerDtoToVolunteer(dto));
         return volunteerConverter.fromVolunteerToVolunteerDto(volunteer);
     }
@@ -54,15 +54,5 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public int getRequest() {
         return 0;
-    }
-
-    public static void validateVolunteerDto(VolunteerDto volunteerDto) {
-        if (volunteerDto == null) {
-            try {
-                throw new ServiceError(ServiceErrorCode.OBJECT_CANNOT_BE_NULL);
-            } catch (ServiceError serviceError) {
-                serviceError.printStackTrace();
-            }
-        }
     }
 }
