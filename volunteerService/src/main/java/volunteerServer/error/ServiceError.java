@@ -1,4 +1,4 @@
-package error;
+package volunteerServer.error;
 
 import java.io.Serializable;
 

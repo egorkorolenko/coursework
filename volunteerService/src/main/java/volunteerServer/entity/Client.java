@@ -1,4 +1,5 @@
-package entity;
+package volunteerServer.entity;
+
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -7,10 +8,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "volunteer")
+@Table(name = "client")
 @Data
 @NoArgsConstructor
-public class Volunteer {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -1,33 +1,31 @@
-package entity;
+package volunteerServer.entity;
 
-
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
-@Table(name = "client")
+@Table(name = "volunteer")
 @Data
 @NoArgsConstructor
-public class Client {
+public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "birthdate")
     private String birthdate;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "login")
     private String login;
 
-    @Column
+    @Column(name = "password")
     private String password;
 }

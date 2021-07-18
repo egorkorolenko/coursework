@@ -1,4 +1,4 @@
-package entity;
+package volunteerServer.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;

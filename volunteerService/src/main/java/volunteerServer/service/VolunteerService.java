@@ -1,7 +1,6 @@
-package service;
+package volunteerServer.service;
 
-import dto.ClientDto;
-import dto.VolunteerDto;
+import volunteerServer.dto.VolunteerDto;
 
 import java.util.List;
 

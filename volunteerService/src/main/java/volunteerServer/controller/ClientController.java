@@ -1,4 +1,4 @@
-package controller;
+package volunteerServer.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;

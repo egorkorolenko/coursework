@@ -1,13 +1,13 @@
-package serviceImpl;
+package volunteerServer.serviceImpl;
 
-import dto.VolunteerDto;
-import entity.Volunteer;
 import org.springframework.stereotype.Component;
+import volunteerServer.dto.VolunteerDto;
+import volunteerServer.entity.Volunteer;
 
 @Component
 public class VolunteerConverter {
 
-    public Volunteer fromUserDtoToUser(VolunteerDto volunteerDto) {
+    public Volunteer fromVolunteerDtoToVolunteer(VolunteerDto volunteerDto) {
         Volunteer volunteer = new Volunteer();
         volunteer.setId(volunteerDto.getId());
         volunteer.setUsername(volunteerDto.getUsername());
@@ -18,7 +18,7 @@ public class VolunteerConverter {
         return volunteer;
     }
 
-    public VolunteerDto fromUserToUserDto(Volunteer volunteer) {
+    public VolunteerDto fromVolunteerToVolunteerDto(Volunteer volunteer) {
         return VolunteerDto.builder()
                 .id(volunteer.getId())
                 .username(volunteer.getUsername())

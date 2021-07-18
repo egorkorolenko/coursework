@@ -1,4 +1,4 @@
-package dto;
+package volunteerServer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDto {
+public class VolunteerDto {
     private Integer id;
     private String username;
     private String birthdate;
