@@ -1,6 +1,7 @@
 package volunteerServer.service;
 
 import volunteerServer.dto.VolunteerDto;
+import volunteerServer.error.ServiceException;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface VolunteerService {
 
     VolunteerDto loginVolunteer(String login, String password);
 
-    VolunteerDto getByLogin(String login);
+    VolunteerDto findByLogin(String login) throws ServiceException;
 
     void logoutVolunteer(String login);
 
@@ -20,5 +21,7 @@ public interface VolunteerService {
 
     //todo написать что-то во входных параметрах
     int getRequest();
+
+    VolunteerDto getById(Integer id) throws ServiceException;
 
 }

@@ -2,10 +2,10 @@ package volunteerServer.error;
 
 import java.io.Serializable;
 
-public class ServiceError extends Exception implements Serializable {
+public class ServiceException extends Exception implements Serializable {
     private final ServiceErrorCode errorCode;
 
-    public ServiceError(ServiceErrorCode errorCode) {
+    public ServiceException(ServiceErrorCode errorCode) {
         this.errorCode = errorCode;
     }
 

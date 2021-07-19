@@ -5,5 +5,5 @@ import volunteerServer.entity.Volunteer;
 
 public interface VolunteerRepository extends JpaRepository<Volunteer, Integer> {
 
-    Volunteer getByLogin(String login);
+    Volunteer findByLogin(String login);
 }
