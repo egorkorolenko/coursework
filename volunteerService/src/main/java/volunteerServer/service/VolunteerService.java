@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface VolunteerService {
 
-    VolunteerDto registerVolunteer(VolunteerDto dto);
+    VolunteerDto registerVolunteer(VolunteerDto dto) throws ServiceException;
 
     VolunteerDto loginVolunteer(String login, String password);
 

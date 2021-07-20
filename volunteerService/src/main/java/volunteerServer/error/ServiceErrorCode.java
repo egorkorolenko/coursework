@@ -8,7 +8,12 @@ public enum ServiceErrorCode implements Serializable {
     INVALID_LOGIN("Неверный логин"),
     INVALID_ID("Неверный ID"),
     LOGIN_NOT_FOUND("Логин не найден"),
-    ID_NOT_FOUND("Id не найден");
+    ID_NOT_FOUND("Id не найден"),
+    INVALID_USERNAME("Некорректное имя"),
+    INVALID_BIRTHDATE("Неверно задана дата рождения"),
+    INVALID_EMAIL("Некорректный адрес электронной почты"),
+    INVALID_PASSWORD("Неправльно задан пароль"),
+    AGE_MUST_OVER_18_YEARS_OLD("Волонтером могут быть люди только старше 18 лет");
     private final String errorString;
 
     ServiceErrorCode(String errorString) {

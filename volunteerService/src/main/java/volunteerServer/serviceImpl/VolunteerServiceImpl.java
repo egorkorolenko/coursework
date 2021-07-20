@@ -25,7 +25,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     private final VolunteerUtils volunteerUtils = new VolunteerUtils();
 
     @Override
-    public VolunteerDto registerVolunteer(VolunteerDto dto) {
+    public VolunteerDto registerVolunteer(VolunteerDto dto) throws ServiceException {
         volunteerUtils.validateDto(dto);
         Volunteer volunteer = volunteerRepository.save(volunteerConverter.fromVolunteerDtoToVolunteer(dto));
         return volunteerConverter.fromVolunteerToVolunteerDto(volunteer);
