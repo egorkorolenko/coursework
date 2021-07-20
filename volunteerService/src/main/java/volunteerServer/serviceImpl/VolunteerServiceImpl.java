@@ -13,6 +13,7 @@ import volunteerServer.serviceUtils.VolunteerUtils;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Log
@@ -44,9 +45,7 @@ public class VolunteerServiceImpl implements VolunteerService {
         if (volunteer != null) {
             return volunteerConverter.fromVolunteerToVolunteerDto(volunteer);
         }
-        log.info("Empty");
-//        throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
-        return null;
+        throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
     }
 
     @Override
@@ -55,13 +54,19 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public void deleteVolunteer(Integer id) {
-
+    public void deleteVolunteer(Integer id) throws ServiceException {
+        if (id == null) {
+            throw new ServiceException(ServiceErrorCode.INVALID_ID);
+        }
+        volunteerRepository.deleteById(id);
     }
 
     @Override
     public List<VolunteerDto> getAllVolunteer() {
-        return null;
+        return volunteerRepository.findAll()
+                .stream()
+                .map(volunteerConverter::fromVolunteerToVolunteerDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -71,15 +76,13 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Override
     public VolunteerDto getById(Integer id) throws ServiceException {
-//        if (id == null){
-//            throw new ServiceException(ServiceErrorCode.INVALID_LOGIN);
-//        }
+        if (id == null) {
+            throw new ServiceException(ServiceErrorCode.INVALID_ID);
+        }
         Optional<Volunteer> volunteer = volunteerRepository.findById(id);
         if (volunteer.isPresent()) {
             return volunteerConverter.fromVolunteerToVolunteerDto(volunteer.get());
         }
-        log.info("Empty");
-//        throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
-        return null;
+        throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
     }
 }

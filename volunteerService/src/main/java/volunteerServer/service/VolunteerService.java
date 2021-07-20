@@ -15,7 +15,7 @@ public interface VolunteerService {
 
     void logoutVolunteer(String login);
 
-    void deleteVolunteer(Integer id);
+    void deleteVolunteer(Integer id) throws ServiceException;
 
     List<VolunteerDto> getAllVolunteer();
 
