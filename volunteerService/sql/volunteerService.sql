@@ -7,7 +7,7 @@ create table volunteer
     id        int          not null auto_increment,
     username  varchar(255) not null,
     birthdate varchar(255) not null,
-    email     varchar(255) not null,
+    email     varchar(255) not null unique,
     login     varchar(255) not null unique,
     password  varchar(255) not null,
     primary key (id)
@@ -18,7 +18,7 @@ create table client
     id        int          not null auto_increment,
     username  varchar(255) not null,
     birthdate varchar(255) not null,
-    email     varchar(255) not null,
+    email     varchar(255) not null unique,
     login     varchar(255) not null unique,
     password  varchar(255) not null,
     primary key (id)
