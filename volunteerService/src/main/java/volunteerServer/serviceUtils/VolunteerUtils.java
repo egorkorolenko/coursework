@@ -34,7 +34,7 @@ public class VolunteerUtils {
     public boolean checkDate(String date) throws ServiceException {
         LocalDate birthdate =
                 LocalDate.parse(date,
-                        DateTimeFormatter.ofPattern("dd/MM/uuuu")
+                        DateTimeFormatter.ofPattern("dd.MM.uuuu")
                                 .withResolverStyle(ResolverStyle.STRICT));
         Period period = Period.between(birthdate, LocalDate.now());
         if ((period.getYears() < 18)) {

@@ -21,16 +21,11 @@ public class VolunteerController {
     private final VolunteerService service;
 
     @PostMapping("/register")
-    public VolunteerDto registerVolunteer(@RequestBody VolunteerDto volunteerDto) {
+    public VolunteerDto registerVolunteer(@RequestBody VolunteerDto volunteerDto) throws ServiceException {
         log.info("Volunteer register: " + volunteerDto);
         return service.registerVolunteer(volunteerDto);
     }
 
-//    @GetMapping("/getByLogin")
-//    public VolunteerDto getByLogin(@RequestBody VolunteerDto volunteerDto) throws ServiceException {
-//        log.info("Handling find by login request: " + volunteerDto.getLogin());
-//        return service.getByLogin(volunteerDto.getLogin());
-//    }
 
     @GetMapping("/findByLogin/{login}")
     public VolunteerDto findByLogin(@PathVariable String login) throws ServiceException {
@@ -56,5 +51,11 @@ public class VolunteerController {
     public List<VolunteerDto> findAllVolunteer() {
         log.info("Handling find all volunteer request");
         return service.getAllVolunteer();
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    public String handle(ServiceException e) {
+        log.error(e.getMessage());
+        return e.getMessage();
     }
 }
