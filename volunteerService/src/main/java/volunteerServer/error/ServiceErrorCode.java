@@ -13,7 +13,9 @@ public enum ServiceErrorCode implements Serializable {
     INVALID_BIRTHDATE("Неверно задана дата рождения"),
     INVALID_EMAIL("Некорректный адрес электронной почты"),
     INVALID_PASSWORD("Неправльно задан пароль"),
-    AGE_MUST_OVER_18_YEARS_OLD("Волонтером могут быть люди только старше 18 лет");
+    AGE_MUST_OVER_18_YEARS_OLD("Волонтером могут быть люди только старше 18 лет"),
+    REQUEST_TEXT_INCORRECT("Некорректный текст запроса обслуживания"),
+    ADDRESS_INCORRECT("Некорректный адрес");
     private final String errorString;
 
     ServiceErrorCode(String errorString) {

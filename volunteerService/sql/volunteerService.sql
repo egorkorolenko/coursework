@@ -30,9 +30,9 @@ create table request
     id           int          not null auto_increment,
     requestText  varchar(255) not null,
     address      varchar(255) not null,
-    isReady      bool,
+    isReady      bool default false,
     id_volunteer int,
-    id_client    int,
+    id_client    int          not null,
     primary key (id),
     foreign key (id_volunteer) references volunteer (id),
     foreign key (id_client) references client (id)

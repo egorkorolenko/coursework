@@ -1,9 +1,8 @@
 package volunteerServer.serviceUtils;
 
 import volunteerServer.dto.ClientDto;
-import volunteerServer.dto.VolunteerDto;
-import volunteerServer.error.ServiceException;
 import volunteerServer.error.ServiceErrorCode;
+import volunteerServer.error.ServiceException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -15,7 +14,7 @@ public class ClientUtils {
         if (clientDto == null) {
             throw new ServiceException(ServiceErrorCode.OBJECT_CANNOT_BE_NULL);
         }
-        if (clientDto.getUsername() == null || !clientDto.getUsername().matches("[A-Za-z0-9_]+")) {
+        if (clientDto.getUsername() == null || !clientDto.getUsername().matches("[А-Яа-яЁёA-Za-z0-9_]+")) {
             throw new ServiceException(ServiceErrorCode.INVALID_USERNAME);
         }
         if (!checkDate(clientDto.getBirthdate())) {
@@ -41,6 +40,6 @@ public class ClientUtils {
         if ((period.getYears() < 18)) {
             throw new ServiceException(ServiceErrorCode.AGE_MUST_OVER_18_YEARS_OLD);
         }
-        return birthdate.isAfter(LocalDate.now().minusYears(100));
+        return birthdate.isAfter(LocalDate.now().minusYears(120));
     }
 }

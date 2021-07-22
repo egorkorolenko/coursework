@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
-import volunteerServer.dto.VolunteerDto;
 import volunteerServer.entity.Client;
-import volunteerServer.entity.Volunteer;
+import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceErrorCode;
 import volunteerServer.error.ServiceException;
 import volunteerServer.repository.ClientRepository;
+import volunteerServer.repository.RequestRepository;
 import volunteerServer.service.ClientService;
 import volunteerServer.serviceUtils.ClientUtils;
 
@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
+    private final RequestRepository requestRepository;
     private final ClientConverter clientConverter = new ClientConverter();
     private final ClientUtils clientUtils = new ClientUtils();
 
@@ -31,6 +32,21 @@ public class ClientServiceImpl implements ClientService {
         clientUtils.validateDto(dto);
         Client client = clientRepository.save(clientConverter.fromClientDtoToClient(dto));
         return clientConverter.fromClientToClientDto(client);
+    }
+
+    @Override
+    public RequestDto addRequest(Integer id, String requestText, String address) throws ServiceException {
+        if (id == null) {
+            throw new ServiceException(ServiceErrorCode.INVALID_ID);
+        }
+        if (requestText == null || requestText.equals("")) {
+            throw new ServiceException(ServiceErrorCode.REQUEST_TEXT_INCORRECT);
+        }
+        if (address == null || address.equals("")) {
+            throw new ServiceException(ServiceErrorCode.ADDRESS_INCORRECT);
+        }
+//        Request request = requestRepository.save()
+        return null;
     }
 
     @Override
@@ -71,10 +87,5 @@ public class ClientServiceImpl implements ClientService {
                 .stream()
                 .map(clientConverter::fromClientToClientDto)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public RequestDto addRequest() {
-        return null;
     }
 }

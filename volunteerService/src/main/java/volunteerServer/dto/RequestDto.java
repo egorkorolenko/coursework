@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestDto {
-    private int id;
+    private Integer id;
     private String requestText;
     private String address;
-    private String isReady;
+    private boolean isReady = false;
+    private Integer id_client;
+    private Integer id_volunteer;
 }

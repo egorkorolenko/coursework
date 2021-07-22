@@ -23,5 +23,11 @@ public class Request {
     private String address;
 
     @Column
-    private String isReady;
+    private Boolean isReady;
+
+    @Column
+    private Integer id_client;
+
+    @Column
+    private Integer id_volunteer;
 }

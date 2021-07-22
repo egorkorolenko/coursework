@@ -14,7 +14,7 @@ public class VolunteerUtils {
         if (volunteerDto == null) {
             throw new ServiceException(ServiceErrorCode.OBJECT_CANNOT_BE_NULL);
         }
-        if (volunteerDto.getUsername() == null || !volunteerDto.getUsername().matches("[A-Za-z0-9_]+")) {
+        if (volunteerDto.getUsername() == null || !volunteerDto.getUsername().matches("[А-Яа-яЁёA-Za-z0-9_]+")) {
             throw new ServiceException(ServiceErrorCode.INVALID_USERNAME);
         }
         if (!checkDate(volunteerDto.getBirthdate())) {
@@ -40,7 +40,7 @@ public class VolunteerUtils {
         if ((period.getYears() < 18)) {
             throw new ServiceException(ServiceErrorCode.AGE_MUST_OVER_18_YEARS_OLD);
         }
-        return birthdate.isAfter(LocalDate.now().minusYears(100));
+        return birthdate.isAfter(LocalDate.now().minusYears(120));
     }
 
 

@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import volunteerServer.dto.ClientDto;
+import volunteerServer.dto.RequestDto;
 import volunteerServer.error.ServiceException;
 import volunteerServer.service.ClientService;
 
@@ -22,6 +23,12 @@ public class ClientController {
     public ClientDto registerClient(@RequestBody ClientDto clientDto) throws ServiceException {
         log.info("Volunteer register: " + clientDto);
         return clientService.registerClient(clientDto);
+    }
+
+    @PostMapping("/{id}/addRequest")
+    public RequestDto addRequest(@PathVariable Integer id, @RequestParam String text, String address) throws ServiceException {
+        log.info("A request was added: " + text);
+        return clientService.addRequest(id,text, address);
     }
 
     @GetMapping("/findByLogin/{login}")
