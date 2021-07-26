@@ -27,12 +27,12 @@ create table client
 
 create table request
 (
-    id           int          not null auto_increment,
-    requestText  varchar(255) not null,
-    address      varchar(255) not null,
-    isReady      bool default false,
-    id_volunteer int,
-    id_client    int          not null,
+    id               int          not null auto_increment,
+    request_text     varchar(255) not null,
+    address          varchar(255) not null,
+    request_is_ready tinyint(1) default 0,
+    id_client        int,
+    id_volunteer     int,
     primary key (id),
     foreign key (id_volunteer) references volunteer (id),
     foreign key (id_client) references client (id)

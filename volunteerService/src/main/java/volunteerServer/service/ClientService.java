@@ -19,5 +19,6 @@ public interface ClientService {
 
     List<ClientDto> getAllClients();
 
-    RequestDto addRequest(Integer id,String requestText, String address) throws ServiceException;
+    //    RequestDto addRequest(Integer id,String requestText, String address) throws ServiceException;
+    RequestDto addRequest(Integer id, RequestDto requestDto) throws ServiceException;
 }

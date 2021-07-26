@@ -26,9 +26,9 @@ public class ClientController {
     }
 
     @PostMapping("/{id}/addRequest")
-    public RequestDto addRequest(@PathVariable Integer id, @RequestParam String text, String address) throws ServiceException {
-        log.info("A request was added: " + text);
-        return clientService.addRequest(id,text, address);
+    public RequestDto addRequest(@PathVariable Integer id, @RequestBody RequestDto requestDto) throws ServiceException {
+        log.info("A request was added: " + requestDto.getRequest_text());
+        return clientService.addRequest(id, requestDto);
     }
 
     @GetMapping("/findByLogin/{login}")

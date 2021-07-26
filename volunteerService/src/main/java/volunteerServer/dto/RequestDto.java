@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequestDto {
     private Integer id;
-    private String requestText;
+    private String request_text;
     private String address;
-    private boolean isReady = false;
+    private Boolean request_is_ready = false;
     private Integer id_client;
     private Integer id_volunteer;
 }

@@ -1,6 +1,7 @@
 package volunteerServer.serviceImpl;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
@@ -19,12 +20,14 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Log
 @AllArgsConstructor
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final RequestRepository requestRepository;
     private final ClientConverter clientConverter = new ClientConverter();
+    private final RequestConverter requestConverter = new RequestConverter();
     private final ClientUtils clientUtils = new ClientUtils();
 
     @Override
@@ -35,18 +38,29 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public RequestDto addRequest(Integer id, String requestText, String address) throws ServiceException {
+    public RequestDto addRequest(Integer id, RequestDto requestDto) throws ServiceException {
         if (id == null) {
             throw new ServiceException(ServiceErrorCode.INVALID_ID);
         }
-        if (requestText == null || requestText.equals("")) {
+        ClientDto clientDto = getById(id);
+        Client client = null;
+        if (clientDto == null) {
+            throw new ServiceException(ServiceErrorCode.CLIENT_NOT_FOUND);
+        } else {
+            client = clientConverter.fromClientDtoToClient(clientDto);
+        }
+        if (requestDto.getRequest_text() == null || requestDto.getRequest_text().equals("")) {
             throw new ServiceException(ServiceErrorCode.REQUEST_TEXT_INCORRECT);
         }
-        if (address == null || address.equals("")) {
+        if (requestDto.getAddress() == null || requestDto.getAddress().equals("")) {
             throw new ServiceException(ServiceErrorCode.ADDRESS_INCORRECT);
         }
-//        Request request = requestRepository.save()
-        return null;
+        Request request = requestConverter.fromRequestDtoToRequest(requestDto);
+        log.info(request.toString());
+        request.setId_client(client);
+        Request newRequest =
+                requestRepository.save(request);
+        return requestConverter.fromRequestToRequestDto(newRequest, client);
     }
 
     @Override
