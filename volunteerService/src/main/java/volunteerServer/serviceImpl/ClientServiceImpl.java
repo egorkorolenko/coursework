@@ -40,23 +40,26 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public RequestDto addRequest(Integer id, RequestDto requestDto) throws ServiceException {
         if (id == null) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
             throw new ServiceException(ServiceErrorCode.INVALID_ID);
         }
         ClientDto clientDto = getById(id);
-        Client client = null;
+        Client client;
         if (clientDto == null) {
+            log.info(String.valueOf(ServiceErrorCode.CLIENT_NOT_FOUND));
             throw new ServiceException(ServiceErrorCode.CLIENT_NOT_FOUND);
         } else {
             client = clientConverter.fromClientDtoToClient(clientDto);
         }
         if (requestDto.getRequest_text() == null || requestDto.getRequest_text().equals("")) {
+            log.info(String.valueOf(ServiceErrorCode.REQUEST_TEXT_INCORRECT));
             throw new ServiceException(ServiceErrorCode.REQUEST_TEXT_INCORRECT);
         }
         if (requestDto.getAddress() == null || requestDto.getAddress().equals("")) {
+            log.info(String.valueOf(ServiceErrorCode.ADDRESS_INCORRECT));
             throw new ServiceException(ServiceErrorCode.ADDRESS_INCORRECT);
         }
         Request request = requestConverter.fromRequestDtoToRequest(requestDto);
-        log.info(request.toString());
         request.setId_client(client);
         Request newRequest =
                 requestRepository.save(request);
@@ -66,30 +69,35 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDto findByLogin(String login) throws ServiceException {
         if (login == null || login.equals("")) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_LOGIN));
             throw new ServiceException(ServiceErrorCode.INVALID_LOGIN);
         }
         Client client = clientRepository.findByLogin(login);
         if (client != null) {
             return clientConverter.fromClientToClientDto(client);
         }
+        log.info(String.valueOf(ServiceErrorCode.LOGIN_NOT_FOUND));
         throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
     }
 
     @Override
     public ClientDto getById(Integer id) throws ServiceException {
         if (id == null) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
             throw new ServiceException(ServiceErrorCode.INVALID_ID);
         }
         Optional<Client> client = clientRepository.findById(id);
         if (client.isPresent()) {
             return clientConverter.fromClientToClientDto(client.get());
         }
-        throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
+        log.info(String.valueOf(ServiceErrorCode.CLIENT_NOT_FOUND));
+        throw new ServiceException(ServiceErrorCode.CLIENT_NOT_FOUND);
     }
 
     @Override
     public void deleteClient(Integer id) throws ServiceException {
         if (id == null) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
             throw new ServiceException(ServiceErrorCode.INVALID_ID);
         }
         clientRepository.deleteById(id);

@@ -39,12 +39,14 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public VolunteerDto findByLogin(String login) throws ServiceException {
         if (login == null || login.equals("")) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_LOGIN));
             throw new ServiceException(ServiceErrorCode.INVALID_LOGIN);
         }
         Volunteer volunteer = volunteerRepository.findByLogin(login);
         if (volunteer != null) {
             return volunteerConverter.fromVolunteerToVolunteerDto(volunteer);
         }
+        log.info(String.valueOf(ServiceErrorCode.LOGIN_NOT_FOUND));
         throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
     }
 
@@ -56,6 +58,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public void deleteVolunteer(Integer id) throws ServiceException {
         if (id == null) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
             throw new ServiceException(ServiceErrorCode.INVALID_ID);
         }
         volunteerRepository.deleteById(id);
@@ -77,12 +80,14 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public VolunteerDto getById(Integer id) throws ServiceException {
         if (id == null) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
             throw new ServiceException(ServiceErrorCode.INVALID_ID);
         }
         Optional<Volunteer> volunteer = volunteerRepository.findById(id);
         if (volunteer.isPresent()) {
             return volunteerConverter.fromVolunteerToVolunteerDto(volunteer.get());
         }
+        log.info(String.valueOf(ServiceErrorCode.LOGIN_NOT_FOUND));
         throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
     }
 }
