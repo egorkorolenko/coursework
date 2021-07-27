@@ -1,11 +1,10 @@
 package volunteerServer.entity;
 
 
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "client")

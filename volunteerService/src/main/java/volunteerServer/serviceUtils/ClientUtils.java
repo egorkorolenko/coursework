@@ -17,7 +17,7 @@ public class ClientUtils {
             log.info(String.valueOf(ServiceErrorCode.OBJECT_CANNOT_BE_NULL));
             throw new ServiceException(ServiceErrorCode.OBJECT_CANNOT_BE_NULL);
         }
-        if (clientDto.getUsername() == null || !clientDto.getUsername().matches("[А-Яа-яЁёA-Za-z0-9_]+")) {
+        if (clientDto.getUsername() == null || !clientDto.getUsername().matches("[А-Яа-яЁёA-Za-z0-9_\\s]+")) {
             log.info(String.valueOf(ServiceErrorCode.INVALID_USERNAME));
             throw new ServiceException(ServiceErrorCode.INVALID_USERNAME);
         }

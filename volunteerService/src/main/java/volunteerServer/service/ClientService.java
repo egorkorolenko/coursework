@@ -2,7 +2,6 @@ package volunteerServer.service;
 
 import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
-import volunteerServer.dto.VolunteerDto;
 import volunteerServer.error.ServiceException;
 
 import java.util.List;
@@ -19,6 +18,5 @@ public interface ClientService {
 
     List<ClientDto> getAllClients();
 
-    //    RequestDto addRequest(Integer id,String requestText, String address) throws ServiceException;
     RequestDto addRequest(Integer id, RequestDto requestDto) throws ServiceException;
 }

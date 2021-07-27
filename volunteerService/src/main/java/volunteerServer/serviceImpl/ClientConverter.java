@@ -1,9 +1,7 @@
 package volunteerServer.serviceImpl;
 
 import volunteerServer.dto.ClientDto;
-import volunteerServer.dto.VolunteerDto;
 import volunteerServer.entity.Client;
-import volunteerServer.entity.Volunteer;
 
 public class ClientConverter {
     public Client fromClientDtoToClient(ClientDto clientDto) {

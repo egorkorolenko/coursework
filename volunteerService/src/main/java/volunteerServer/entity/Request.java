@@ -24,16 +24,10 @@ public class Request {
     @Column(name = "request_is_ready")
     private Boolean request_is_ready;
 
-//    @Column
-//    private Integer id_client;
-//
-//    @Column
-//    private Integer id_volunteer;
-//
     @OneToOne
     @JoinColumn(name = "id_client")
     private Client id_client;
-//
+
     @OneToOne
     @JoinColumn(name = "id_volunteer")
     private Volunteer id_volunteer;

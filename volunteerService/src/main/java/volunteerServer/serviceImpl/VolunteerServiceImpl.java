@@ -13,10 +13,8 @@ import volunteerServer.repository.VolunteerRepository;
 import volunteerServer.service.VolunteerService;
 import volunteerServer.serviceUtils.VolunteerUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.function.Predicate.not;
@@ -92,11 +90,6 @@ public class VolunteerServiceImpl implements VolunteerService {
         log.info(String.valueOf(ServiceErrorCode.LOGIN_NOT_FOUND));
         throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
     }
-
-//    @Override
-//    public List<Request> getClientRequest() {
-//        return new ArrayList<>(requestRepository.findAll());
-//    }
 
     @Override
     public List<Request> getClientRequest() {

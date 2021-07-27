@@ -1,6 +1,5 @@
 package volunteerServer.serviceImpl;
 
-import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
 import volunteerServer.entity.Client;
 import volunteerServer.entity.Request;
