@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import volunteerServer.dto.VolunteerDto;
+import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceException;
 import volunteerServer.service.VolunteerService;
 
@@ -53,9 +54,9 @@ public class VolunteerController {
         return service.getAllVolunteer();
     }
 
-    @ExceptionHandler(ServiceException.class)
-    public String handle(ServiceException e) {
-        log.error(e.getMessage());
-        return e.getMessage();
+    @GetMapping("/getClientRequests")
+    public List<Request> getClientRequests() {
+        log.info("customer requests have been received: ");
+        return service.getClientRequest();
     }
 }

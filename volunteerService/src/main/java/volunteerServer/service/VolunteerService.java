@@ -1,6 +1,7 @@
 package volunteerServer.service;
 
 import volunteerServer.dto.VolunteerDto;
+import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceException;
 
 import java.util.List;
@@ -19,9 +20,7 @@ public interface VolunteerService {
 
     List<VolunteerDto> getAllVolunteer();
 
-    //todo написать что-то во входных параметрах
-    int getRequest();
-
     VolunteerDto getById(Integer id) throws ServiceException;
 
+    List<Request> getClientRequest();
 }

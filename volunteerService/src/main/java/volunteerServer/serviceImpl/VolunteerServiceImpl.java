@@ -4,16 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import volunteerServer.dto.VolunteerDto;
+import volunteerServer.entity.Request;
 import volunteerServer.entity.Volunteer;
 import volunteerServer.error.ServiceErrorCode;
 import volunteerServer.error.ServiceException;
+import volunteerServer.repository.RequestRepository;
 import volunteerServer.repository.VolunteerRepository;
 import volunteerServer.service.VolunteerService;
 import volunteerServer.serviceUtils.VolunteerUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static java.util.function.Predicate.not;
 
 @Service
 @Log
@@ -21,6 +27,7 @@ import java.util.stream.Collectors;
 public class VolunteerServiceImpl implements VolunteerService {
 
     private final VolunteerRepository volunteerRepository;
+    private final RequestRepository requestRepository;
     private final VolunteerConverter volunteerConverter;
     private final VolunteerUtils volunteerUtils = new VolunteerUtils();
 
@@ -73,11 +80,6 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public int getRequest() {
-        return 0;
-    }
-
-    @Override
     public VolunteerDto getById(Integer id) throws ServiceException {
         if (id == null) {
             log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
@@ -89,5 +91,15 @@ public class VolunteerServiceImpl implements VolunteerService {
         }
         log.info(String.valueOf(ServiceErrorCode.LOGIN_NOT_FOUND));
         throw new ServiceException(ServiceErrorCode.LOGIN_NOT_FOUND);
+    }
+
+//    @Override
+//    public List<Request> getClientRequest() {
+//        return new ArrayList<>(requestRepository.findAll());
+//    }
+
+    @Override
+    public List<Request> getClientRequest() {
+        return requestRepository.findAll().stream().filter(not(Request::getRequest_is_ready)).collect(Collectors.toList());
     }
 }
