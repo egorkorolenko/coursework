@@ -67,6 +67,26 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
+    public void removeRequest(Integer id, RequestDto requestDto) throws ServiceException {
+        log.info("Id request" + requestDto.getId_client());
+        if (requestDto.getId_client() == null) {
+            log.info(String.valueOf(ServiceErrorCode.INVALID_ID));
+            throw new ServiceException(ServiceErrorCode.INVALID_ID);
+        }
+//        List<Request> requests = getRequestByIdClient(id);
+        requestRepository.deleteById(requestDto.getId());
+    }
+
+    @Override
+    public List<Request> getMyRequests(Integer id) throws ServiceException {
+        Client client = clientConverter.fromClientDtoToClient(getById(id));
+        return requestRepository.findAll()
+                .stream()
+                .filter(request -> request.getId_client().equals(client))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public ClientDto findByLogin(String login) throws ServiceException {
         if (login == null || login.equals("")) {
             log.info(String.valueOf(ServiceErrorCode.INVALID_LOGIN));
@@ -110,4 +130,5 @@ public class ClientServiceImpl implements ClientService {
                 .map(clientConverter::fromClientToClientDto)
                 .collect(Collectors.toList());
     }
+
 }

@@ -59,4 +59,9 @@ public class VolunteerController {
         log.info("customer requests have been received: ");
         return service.getClientRequest();
     }
+
+//    @PostMapping("/{id}/takeRequestForExecution")
+//    public Request takeRequestForExecution(@PathVariable Integer id, ){
+//
+//    }
 }
