@@ -17,7 +17,8 @@ public enum ServiceErrorCode implements Serializable {
     REQUEST_TEXT_INCORRECT("Некорректный текст запроса обслуживания"),
     ADDRESS_INCORRECT("Некорректный адрес"),
     CLIENT_NOT_FOUND("Клиент не найден"),
-    INVALID_REPORT("Отчет некорректный");
+    INVALID_REPORT("Отчет некорректный"),
+    REQUEST_ALREADY_READY("Запрос уже выполнен");
     private final String errorString;
 
     ServiceErrorCode(String errorString) {

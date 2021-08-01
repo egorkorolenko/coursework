@@ -18,10 +18,10 @@ public class ResponseConverter {
     public Response fromResponseDtoToResponse(ResponseDto report) {
         Response response = new Response();
         response.setId(report.getId());
-        response.setResponse(response.getResponse());
-        response.setId_request(requestRepository.getById(report.getId_request()));
-        response.setId_volunteer(volunteerRepository.getById(report.getId_volunteer()));
-        response.setRequestIsReady(report.getRequestIsReady());
+        response.setResponse(report.getResponse());
+        response.setIdRequest(requestRepository.getById(report.getIdRequest()));
+        response.setIdVolunteer(volunteerRepository.getById(report.getIdVolunteer()));
+        response.setIsReady(report.getIsReady());
         return response;
     }
 
@@ -29,9 +29,9 @@ public class ResponseConverter {
         return ResponseDto.builder()
                 .id(response.getId())
                 .response(response.getResponse())
-                .id_volunteer(response.getId_volunteer().getId())
-                .id_request(response.getId_request().getId())
-                .requestIsReady(response.getRequestIsReady())
+                .idVolunteer(response.getIdVolunteer().getId())
+                .idRequest(response.getIdRequest().getId())
+                .isReady(response.getIsReady())
                 .build();
 
     }

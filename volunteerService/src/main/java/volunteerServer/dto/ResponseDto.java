@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseDto {
-
-    private int id;
+    private Integer id;
     private String response;
-    private Integer id_request;
-    private Integer id_volunteer;
-    private Boolean requestIsReady;
+    private Integer idRequest;
+    private Integer idVolunteer;
+    private Boolean isReady = false;
 }

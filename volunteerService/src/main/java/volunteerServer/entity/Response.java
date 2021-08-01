@@ -10,23 +10,22 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class Response {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "response")
     private String response;
 
     @OneToOne
     @JoinColumn(name = "id_request")
-    private Request id_request;
+    private Request idRequest;
 
     @OneToOne
     @JoinColumn(name = "id_volunteer")
-    private Volunteer id_volunteer;
+    private Volunteer idVolunteer;
 
-    @Column(name = "requestIsReady")
-    private Boolean requestIsReady;
+    @Column(name = "isready")
+    private Boolean isReady = false;
 }
 
