@@ -1,9 +1,10 @@
-package volunteerServer.serviceImpl;
+package volunteerServer.converters;
 
+import org.springframework.stereotype.Component;
 import volunteerServer.dto.RequestDto;
-import volunteerServer.entity.Client;
 import volunteerServer.entity.Request;
 
+@Component
 public class RequestConverter {
     public Request fromRequestDtoToRequest(RequestDto requestDto) {
         Request request = new Request();
@@ -16,13 +17,13 @@ public class RequestConverter {
         return request;
     }
 
-    public RequestDto fromRequestToRequestDto(Request request, Client client) {
+    public RequestDto fromRequestToRequestDto(Request request) {
         return RequestDto.builder()
                 .id(request.getId())
                 .request_text(request.getRequest_text())
                 .address(request.getAddress())
                 .request_is_ready(request.getRequest_is_ready())
-                .id_client(client.getId())
+                .id_client(request.getId_client().getId())
                 .id_volunteer(null)
                 .build();
     }

@@ -16,7 +16,8 @@ public enum ServiceErrorCode implements Serializable {
     AGE_MUST_OVER_18_YEARS_OLD("Волонтером могут быть люди только старше 18 лет"),
     REQUEST_TEXT_INCORRECT("Некорректный текст запроса обслуживания"),
     ADDRESS_INCORRECT("Некорректный адрес"),
-    CLIENT_NOT_FOUND("Клиент не найден");
+    CLIENT_NOT_FOUND("Клиент не найден"),
+    INVALID_REPORT("Отчет некорректный");
     private final String errorString;
 
     ServiceErrorCode(String errorString) {

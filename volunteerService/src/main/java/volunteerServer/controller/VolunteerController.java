@@ -1,10 +1,11 @@
 package volunteerServer.controller;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import volunteerServer.dto.RequestDto;
+import volunteerServer.dto.ResponseDto;
 import volunteerServer.dto.VolunteerDto;
 import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceException;
@@ -16,7 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/volunteer")
 @AllArgsConstructor
-@Log
 @CrossOrigin
 public class VolunteerController {
     private final VolunteerService service;
@@ -26,7 +26,6 @@ public class VolunteerController {
         log.info("Volunteer register: " + volunteerDto);
         return service.registerVolunteer(volunteerDto);
     }
-
 
     @GetMapping("/findByLogin/{login}")
     public VolunteerDto findByLogin(@PathVariable String login) throws ServiceException {
@@ -60,8 +59,17 @@ public class VolunteerController {
         return service.getClientRequest();
     }
 
-//    @PostMapping("/{id}/takeRequestForExecution")
-//    public Request takeRequestForExecution(@PathVariable Integer id, ){
-//
-//    }
+    @GetMapping("/{idVolunteer}/takeRequest")
+    public RequestDto takeRequest(@PathVariable Integer idVolunteer, @RequestParam Integer id) {
+        log.info("We are take request: ");
+        System.out.println(id);
+        return service.takeRequest(idVolunteer, id);
+    }
+
+    @PostMapping("/{id}/sendResponse")
+    public ResponseDto sendResponse(@PathVariable Integer id,
+                                    @RequestBody ResponseDto report) throws ServiceException {
+        log.info("Send a report: " + report.getResponse());
+        return service.sendResponse(id, report);
+    }
 }

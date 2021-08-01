@@ -1,4 +1,4 @@
-package volunteerServer.serviceImpl;
+package volunteerServer.converters;
 
 import volunteerServer.dto.ClientDto;
 import volunteerServer.entity.Client;

@@ -3,6 +3,8 @@ package volunteerServer.serviceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
+import volunteerServer.converters.ClientConverter;
+import volunteerServer.converters.RequestConverter;
 import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
 import volunteerServer.entity.Client;
@@ -63,7 +65,7 @@ public class ClientServiceImpl implements ClientService {
         request.setId_client(client);
         Request newRequest =
                 requestRepository.save(request);
-        return requestConverter.fromRequestToRequestDto(newRequest, client);
+        return requestConverter.fromRequestToRequestDto(newRequest);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package volunteerServer.serviceUtils;
 
 import lombok.extern.java.Log;
+import org.springframework.stereotype.Component;
 import volunteerServer.dto.VolunteerDto;
 import volunteerServer.error.ServiceException;
 import volunteerServer.error.ServiceErrorCode;
@@ -11,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
 @Log
+@Component
 public class VolunteerUtils {
     public void validateDto(VolunteerDto volunteerDto) throws ServiceException {
         if (volunteerDto == null) {

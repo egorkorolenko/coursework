@@ -1,5 +1,7 @@
 package volunteerServer.service;
 
+import volunteerServer.dto.RequestDto;
+import volunteerServer.dto.ResponseDto;
 import volunteerServer.dto.VolunteerDto;
 import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceException;
@@ -23,4 +25,8 @@ public interface VolunteerService {
     VolunteerDto getById(Integer id) throws ServiceException;
 
     List<Request> getClientRequest();
+
+    RequestDto takeRequest(Integer id, Integer idRequest);
+
+    ResponseDto sendResponse(Integer id, ResponseDto response) throws ServiceException;
 }

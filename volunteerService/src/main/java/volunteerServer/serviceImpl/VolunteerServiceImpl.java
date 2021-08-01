@@ -3,12 +3,19 @@ package volunteerServer.serviceImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
+import volunteerServer.converters.RequestConverter;
+import volunteerServer.converters.ResponseConverter;
+import volunteerServer.converters.VolunteerConverter;
+import volunteerServer.dto.RequestDto;
+import volunteerServer.dto.ResponseDto;
 import volunteerServer.dto.VolunteerDto;
 import volunteerServer.entity.Request;
+import volunteerServer.entity.Response;
 import volunteerServer.entity.Volunteer;
 import volunteerServer.error.ServiceErrorCode;
 import volunteerServer.error.ServiceException;
 import volunteerServer.repository.RequestRepository;
+import volunteerServer.repository.ResponseRepository;
 import volunteerServer.repository.VolunteerRepository;
 import volunteerServer.service.VolunteerService;
 import volunteerServer.serviceUtils.VolunteerUtils;
@@ -24,10 +31,13 @@ import static java.util.function.Predicate.not;
 @AllArgsConstructor
 public class VolunteerServiceImpl implements VolunteerService {
 
+    private final ResponseConverter responseConverter;
     private final VolunteerRepository volunteerRepository;
     private final RequestRepository requestRepository;
+    private final ResponseRepository responseRepository;
     private final VolunteerConverter volunteerConverter;
-    private final VolunteerUtils volunteerUtils = new VolunteerUtils();
+    private final RequestConverter requestConverter;
+    private final VolunteerUtils volunteerUtils;
 
     @Override
     public VolunteerDto registerVolunteer(VolunteerDto dto) throws ServiceException {
@@ -94,5 +104,22 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public List<Request> getClientRequest() {
         return requestRepository.findAll().stream().filter(not(Request::getRequest_is_ready)).collect(Collectors.toList());
+    }
+
+    @Override
+    public RequestDto takeRequest(Integer id, Integer idRequest) {
+        return requestConverter.fromRequestToRequestDto(requestRepository.findById(idRequest).get());
+    }
+
+    @Override
+    public ResponseDto sendResponse(Integer id, ResponseDto report) throws ServiceException {
+        if (report.getResponse() == null || report.getResponse().equals("")) {
+            throw new ServiceException(ServiceErrorCode.INVALID_REPORT);
+        }
+        if (report.getRequestIsReady()) {
+            requestRepository.getById(report.getId_request()).setId_volunteer(volunteerRepository.findById(id).get());
+        }
+        Response response = responseRepository.save(responseConverter.fromResponseDtoToResponse(report));
+        return responseConverter.fromResponseToResponseDto(response);
     }
 }

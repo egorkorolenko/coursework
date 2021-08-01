@@ -1,4 +1,4 @@
-package volunteerServer.serviceImpl;
+package volunteerServer.converters;
 
 import org.springframework.stereotype.Component;
 import volunteerServer.dto.VolunteerDto;
