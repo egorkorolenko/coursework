@@ -80,11 +80,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Request> getMyRequests(Integer id) throws ServiceException {
+    public List<RequestDto> getMyRequests(Integer id) throws ServiceException {
         Client client = clientConverter.fromClientDtoToClient(getById(id));
         return requestRepository.findAll()
                 .stream()
                 .filter(request -> request.getId_client().equals(client))
+                .map(requestConverter::fromRequestToRequestDto)
                 .collect(Collectors.toList());
     }
 

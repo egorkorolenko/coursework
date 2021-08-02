@@ -29,4 +29,6 @@ public interface VolunteerService {
     RequestDto takeRequest(Integer id, Integer idRequest);
 
     ResponseDto sendResponse(Integer id, ResponseDto response) throws ServiceException;
+
+    List<ResponseDto> getMyReports(Integer id) throws ServiceException;
 }

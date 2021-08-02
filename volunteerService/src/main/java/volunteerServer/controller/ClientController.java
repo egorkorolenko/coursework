@@ -61,12 +61,12 @@ public class ClientController {
     @DeleteMapping("/{id}/removeRequest")
     public void removeRequest(@PathVariable Integer id,
                               @RequestBody RequestDto requestDto) throws ServiceException {
-        log.info("Request was deleted: "+ requestDto.getRequest_text());
-        clientService.removeRequest(id,requestDto);
+        log.info("Request was deleted: " + requestDto.getRequest_text());
+        clientService.removeRequest(id, requestDto);
     }
 
     @GetMapping("/{id}/getMyRequests")
-    public List<Request> getMyRequests(@PathVariable Integer id) throws ServiceException {
+    public List<RequestDto> getMyRequests(@PathVariable Integer id) throws ServiceException {
         log.info("Your requests: ");
         return clientService.getMyRequests(id);
     }

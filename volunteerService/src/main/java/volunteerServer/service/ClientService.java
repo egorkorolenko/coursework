@@ -2,7 +2,6 @@ package volunteerServer.service;
 
 import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
-import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceException;
 
 import java.util.List;
@@ -23,5 +22,5 @@ public interface ClientService {
 
     void removeRequest(Integer id, RequestDto requestDto) throws ServiceException;
 
-    List<Request> getMyRequests(Integer id) throws ServiceException;
+    List<RequestDto> getMyRequests(Integer id) throws ServiceException;
 }

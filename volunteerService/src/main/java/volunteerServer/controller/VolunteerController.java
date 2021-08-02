@@ -24,7 +24,7 @@ public class VolunteerController {
     @PostMapping("/register")
     public VolunteerDto registerVolunteer(@RequestBody VolunteerDto volunteerDto) throws ServiceException {
         log.info("Volunteer register: " + volunteerDto);
-        log.info("VOlunteer:"+ volunteerDto.toString());
+        log.info("VOlunteer:" + volunteerDto.toString());
         return service.registerVolunteer(volunteerDto);
     }
 
@@ -71,7 +71,12 @@ public class VolunteerController {
     public ResponseDto sendResponse(@PathVariable Integer id,
                                     @RequestBody ResponseDto report) throws ServiceException {
         log.info("Send a report: " + report.getResponse());
-        log.info("ALL DTO: "+ report.toString());
         return service.sendResponse(id, report);
+    }
+
+    @GetMapping("/{id}/getMyReports")
+    public List<ResponseDto> getMyReports(@PathVariable Integer id) throws ServiceException {
+        log.info("Your reports: ");
+        return service.getMyReports(id);
     }
 }

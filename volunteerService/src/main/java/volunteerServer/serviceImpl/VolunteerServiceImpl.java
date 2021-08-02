@@ -118,15 +118,15 @@ public class VolunteerServiceImpl implements VolunteerService {
 
     @Override
     public ResponseDto sendResponse(Integer id, ResponseDto report) throws ServiceException {
-        if(requestRepository.findById(report.getIdRequest()).get().getRequest_is_ready()){
+        if (requestRepository.findById(report.getIdRequest()).get().getRequest_is_ready()) {
             throw new ServiceException(ServiceErrorCode.REQUEST_ALREADY_READY);
         }
         if (report.getResponse() == null || report.getResponse().equals("")) {
             throw new ServiceException(ServiceErrorCode.INVALID_REPORT);
         }
 
-        if(report.getIdVolunteer()==null)
-        report.setIdVolunteer(id);
+        if (report.getIdVolunteer() == null)
+            report.setIdVolunteer(id);
 
         if (report.getIsReady()) {
             requestRepository.getById(report.getIdRequest()).setId_volunteer(volunteerRepository.findById(id).get());
@@ -134,5 +134,18 @@ public class VolunteerServiceImpl implements VolunteerService {
         }
         Response response = responseRepository.save(responseConverter.fromResponseDtoToResponse(report));
         return responseConverter.fromResponseToResponseDto(response);
+    }
+
+    @Override
+    public List<ResponseDto> getMyReports(Integer id) throws ServiceException {
+        if (id == null) {
+            throw new ServiceException(ServiceErrorCode.INVALID_ID);
+        }
+        Volunteer volunteer = volunteerConverter.fromVolunteerDtoToVolunteer(getById(id));
+        return responseRepository.findAll()
+                .stream()
+                .filter(response -> response.getIdVolunteer().equals(volunteer))
+                .map(responseConverter::fromResponseToResponseDto)
+                .collect(Collectors.toList());
     }
 }
