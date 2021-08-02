@@ -1,5 +1,6 @@
 package volunteerServer.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,8 @@ public class VolunteerDto {
     private String username;
     private String birthdate;
     private String email;
+    @JsonIgnore
     private String login;
+    @JsonIgnore
     private String password;
 }

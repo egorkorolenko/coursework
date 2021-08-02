@@ -24,7 +24,6 @@ public class VolunteerController {
     @PostMapping("/register")
     public VolunteerDto registerVolunteer(@RequestBody VolunteerDto volunteerDto) throws ServiceException {
         log.info("Volunteer register: " + volunteerDto);
-        log.info("VOlunteer:" + volunteerDto.toString());
         return service.registerVolunteer(volunteerDto);
     }
 

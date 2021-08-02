@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import volunteerServer.dto.ClientDto;
 import volunteerServer.dto.RequestDto;
-import volunteerServer.entity.Request;
 import volunteerServer.error.ServiceException;
 import volunteerServer.service.ClientService;
 
@@ -59,10 +58,11 @@ public class ClientController {
     }
 
     @DeleteMapping("/{id}/removeRequest")
-    public void removeRequest(@PathVariable Integer id,
-                              @RequestBody RequestDto requestDto) throws ServiceException {
+    public ResponseEntity<Object> removeRequest(@PathVariable Integer id,
+                                                @RequestBody RequestDto requestDto) throws ServiceException {
         log.info("Request was deleted: " + requestDto.getRequest_text());
         clientService.removeRequest(id, requestDto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}/getMyRequests")
